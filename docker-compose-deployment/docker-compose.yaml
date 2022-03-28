@@ -2,12 +2,14 @@ version: '3.8'
 services:
   frontend:
     image: 'hashicorpdemoapp/frontend:v0.0.8'
+    restart: always
     environment:
       - NEXT_PUBLIC_PUBLIC_API_URL=http://public-api:8080
     ports:
       - '80:3000'
   public-api:
     image: 'hashicorpdemoapp/public-api:v0.0.6'
+    restart: always
     environment:
       - PRODUCT_API_URI=http://product-api:9090
       - PAYMENT_API_URI=http://payments:8080
@@ -18,6 +20,7 @@ services:
       - '8080:8080'
   product-api:
     image: 'hashicorpdemoapp/product-api:v0.0.20'
+    restart: always
     volumes:
       - type: bind
         source: ./conf.json
@@ -28,6 +31,7 @@ services:
       - '9090:9090'
   product-db:
     image: 'hashicorpdemoapp/product-api-db:v0.0.20'
+    restart: always
     ports:
       - '5432:5432'
     environment:
